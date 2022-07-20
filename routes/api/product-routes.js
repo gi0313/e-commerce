@@ -42,6 +42,16 @@ router.get('/:id', (req, res) => {
       as: 'tags'
     }]
   })
+  .then(dbProductData => {
+    if(!dbProductData) {
+      res.status(404).json({message: 'No product exists'})
+      return;
+    }
+  })
+  .catch(err => {
+    console.log(err);
+    res.status(500).json(err)
+  })
 });
 
 // create new product
